@@ -15,5 +15,3 @@ Bootstrap
 Responsive Design
 
 HTML / CSS
-
-UI/UX Design Principles
