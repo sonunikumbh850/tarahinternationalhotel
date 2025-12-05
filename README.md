@@ -15,3 +15,5 @@ Bootstrap
 Responsive Design
 
 HTML / CSS
+
+"The admin panel for the booking dashboard is still under development."
