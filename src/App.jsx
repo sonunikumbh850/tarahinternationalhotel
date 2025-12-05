@@ -1,35 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import SplashScreen from "./components/SplashScreen";
+import NavbarComponents from "./components/NavbarComponents";
+import Home from "./pages/Home";
+import Services from "./pages/Services";
+import RoomRestaurant from "./pages/RoomRestaurant";
+import Gallery from "./pages/Gallery";
+import PricingPlan from "./pages/PricingPlan";
+import Contact from "./pages/Contact";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsAndConditions from "./pages/TermsAndConditions";
+import Support from "./pages/Support";
+import DestinationDetail from "./components/DestinationDetail";
+import BookingConfirmation from "./components/BookingConfirmation";
+import Footer from "./components/Footer";
+import ScrollToTopButton from "./components/ScrollToTopButton";
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <SplashScreen />;
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="fade-in">
+        <NavbarComponents />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/rooms" element={<RoomRestaurant />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/pricing-plan" element={<PricingPlan />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-conditions" element={<TermsAndConditions />} />
+          <Route path="/supports" element={<Support />} />
+          <Route path="/destinations/:slug" element={<DestinationDetail />} />
+          <Route path="/booking-confirmation" element={<BookingConfirmation />} />
+        </Routes>
+        <Footer />
+        <ScrollToTopButton />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
